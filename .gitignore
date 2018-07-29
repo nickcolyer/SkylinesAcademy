@@ -1,1 +1,14 @@
 Terraform/Module 1/terraform.tfvars
+Terraform/Module 1/.terraform/plugins/windows_amd64/terraform-provider-azurerm_v1.8.0_x4.exe
+Terraform/Module 1/.terraform/plugins/windows_amd64/lock.json
+Terraform/Module 5/terraform.tfvars
+Terraform/Module 5/terraform.tfstate
+Terraform/Module 4/terraform.tfstate
+Terraform/Module 1/terraform.tfstate
+Terraform/Module 1/terraform.tfstate.backup
+Terraform/Module 4/terraform.tfstate
+Terraform/Module 4/terraform.tfstate.backup
+Terraform/Module 5/terraform.tfstate
+Terraform/Module 5/terraform.tfstate.backup
+Terraform/Module 5/.terraform/plugins/windows_amd64/terraform-provider-azurerm_v1.11.0_x4.exe
+Terraform/Module 4/.terraform/plugins/windows_amd64/terraform-provider-azurerm_v1.11.0_x4.exe
