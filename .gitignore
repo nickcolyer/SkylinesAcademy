@@ -1,3 +1,6 @@
+*.tfvars
+*.tfstate
+*.tfstate.backup
 Terraform/Module 1/terraform.tfvars
 Terraform/Module 1/.terraform/plugins/windows_amd64/terraform-provider-azurerm_v1.8.0_x4.exe
 Terraform/Module 1/.terraform/plugins/windows_amd64/lock.json
