@@ -29,12 +29,8 @@ read -p "Type the Azure username: " AZ_USER && \
   az login -u $AZ_USER -p $AZ_PASS
 ```
 
-To make Terraform interact with Azure a new Azure App must be created so then those credentials can be used by the `terraform` command.
-
-An Azure **Service Principal** is a security identity used by user-created Apps,
-services, and automation tools to access specific Azure resources.
-
-For more details visit: https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html
+To make Terraform interact with Azure a new Azure App must be created so then those credentials can be used by the `terraform` command. An Azure **Service Principal** is a security identity used by user-created Apps,
+services, and automation tools to access specific Azure resources. For more details visit: https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html
 
 To generate a Service Principal (an Azure App) as a **provider** for the Terraform code,
 run:
@@ -92,3 +88,34 @@ These terraform configuration/execution files are created by the `terraform` com
   which dynamically picks whatever is defined inside the file `terraform.tfvars`.
 
 Check the directory `Module 5` to see an example of this configuration setup.
+
+# Deploy a Virtual Machine in Azure with Terraform
+
+To define a virtual machine (VM) go to https://www.terraform.io/, then click on:
+- Docs (top right bar)
+- Providers (left side panel)
+- Azure (table in the main section)
+- Compute Resources / `azure_virtual_machine` (left side panel, then landing here: https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html)
+
+# Terraform Modules
+
+Terraform **modules** are used to factor out functionality into a sub-directory,
+that **can be referenced from somewhere else** e.g. the `main.tf` file in the directory `Module 7` providing the
+file system path to the sub-directory where the Terraform module is defined.
+
+Check the documentation here:
+
+- https://www.terraform.io/intro/getting-started/modules.html
+- https://www.terraform.io/docs/modules/index.html
+- https://www.terraform.io/docs/modules/create.html
+
+Modules can be shared on: https://registry.terraform.io/
+
+The directory `07b_module` is an usage example of the "compute" module.
+Make sure you have the **Azure CLI 2.0** installed, otherwise this
+module will give errors e.g. run `az login` to login as a first step.
+
+# Terraform graph
+
+To **see all the resources and the mappings between them** you can use
+the command: `terraform graph`.
