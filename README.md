@@ -1,5 +1,7 @@
 # SkylinesAcademy
 
+This is the code and documentation for the MOOC on Udemy with title: *"Getting Started with Terraform for Azure"*.
+
 ## Terraform installation
 
 On Linux/Mac using bash:
@@ -33,7 +35,7 @@ To make Terraform interact with Azure a new Azure App must be created so then th
 services, and automation tools to access specific Azure resources. For more details visit: https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html
 
 To generate a Service Principal (an Azure App) as a **provider** for the Terraform code,
-run:
+run the following command with the Azure CLI 2.0:
 
 ```sh
 az ad sp create-for-rbac -n "Terraform-Temp" --role="Contributor" --scope="/subscriptions/${AZ_SUB_ID}"
@@ -41,10 +43,10 @@ az ad sp create-for-rbac -n "Terraform-Temp" --role="Contributor" --scope="/subs
 
 This will provide a JSON configuration object as the output that can be used later on inside your `*.tf` files.
 
-- the `appId` will become the filed `client_id`
-- the `password` will become the field `client_secret`
-
-The Subscription ID (`${AZ_SUB_ID}` in the previous command) and the Tenant ID (later on used in the Terraform fields `subscription_id` and `tenant_id`) are stored in `~/.azure/azureProfile.json` after you login to Azure with the Azure CLI 2.0.
+- the `appId` will become the Terraform filed `client_id`
+- the `password` will become the Terraform field `client_secret`
+- the Subscription ID (`${AZ_SUB_ID}` in the previous command) will become the Terraform field `subscription_id`, it is stored in `~/.azure/azureProfile.json` after you login to Azure with the Azure CLI 2.0
+- the Tenant ID can be found in the JSON output object of the previous command or in `~/.azure/azureProfile.json`, it will become the Terraform field `tenant_id`
 
 # Terraform Constructs and Execution
 
@@ -73,7 +75,7 @@ The `terraform` commands (targeting the current directory containing the `*.tf` 
 3. **Destroy**: to destroy all the resources defined in the code
    (`terraform destroy`, you need to type `yes` when asked for)
 
-These terraform configuration/execution files are created by the `terraform` command and can be added to your `.gitignore`:
+The following configuration/execution files are created by the `terraform` command and can be added to your `.gitignore` to avoid including them in the versioned code base with git:
 
 - `.terraform` (created when initializing the project)
 - `terraform.tfstate` (created when applying the plan)
@@ -82,8 +84,8 @@ These terraform configuration/execution files are created by the `terraform` com
 # Making the code structure more robust
 
 - The secrets like passwords and IDs should be stored in the file `terraform.tfvars`
-  which should be included into the `.gitignore`
-  (`echo terraform.tfvars >> .gitignore`).
+  which should not be included in your git repository, it could be added to the `.gitignore` file to be ignored
+  (on Linux/Max bash: `echo terraform.tfvars >> .gitignore`).
 - The file `main.tf` then should read the variables defined in the file `variables.tf`
   which dynamically picks whatever is defined inside the file `terraform.tfvars`.
 
@@ -100,7 +102,8 @@ To define a virtual machine (VM) go to https://www.terraform.io/, then click on:
 # Terraform Modules
 
 Terraform **modules** are used to factor out functionality into a sub-directory,
-that **can be referenced from somewhere else** e.g. the `main.tf` file in the directory `Module 7` providing the
+that **can be referenced from somewhere else** and reused multiple times.
+Take as an example the `main.tf` file in the directory `Module 7` providing the
 file system path to the sub-directory where the Terraform module is defined.
 
 Check the documentation here:
@@ -109,13 +112,13 @@ Check the documentation here:
 - https://www.terraform.io/docs/modules/index.html
 - https://www.terraform.io/docs/modules/create.html
 
-Modules can be shared on: https://registry.terraform.io/
+Modules can be shared with the Terraform community on: https://registry.terraform.io/
 
-The directory `07b_module` is an usage example of the "compute" module.
+The directory `Module 7b` is an usage example of the "compute" module.
 Make sure you have the **Azure CLI 2.0** installed, otherwise this
-module will give errors e.g. run `az login` to login as a first step.
+module will give errors i.e. run `az login` to login as a first step.
 
 # Terraform graph
 
-To **see all the resources and the mappings between them** you can use
+To **see all the resources and the mappings between them** as defined in your Terraform files you can use
 the command: `terraform graph`.
